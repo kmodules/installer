@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "prepare-kubernetes-cluster.fullname" . }}
+  labels:
+    {{- include "prepare-kubernetes-cluster.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs: ["get", "list", "delete"]
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs: ["get", "list", "delete"]
