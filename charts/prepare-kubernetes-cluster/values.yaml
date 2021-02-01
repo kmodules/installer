@@ -7,13 +7,13 @@ nameOverride: ""
 # Overrides fullname template
 fullnameOverride: ""
 
-bash:
+preparer:
   # Docker image used to run kernel configuration commands
-  repository: busybox
+  repository: tianon/toybox
   # Image pull policy of Docker image used for node preparation
   pullPolicy: IfNotPresent
   # Image tag of Docker image used for node preparation
-  tag: latest
+  tag: 0.8.4
   # Security options the node preparer container should run with
   securityContext: # +doc-gen:break
     privileged: true
@@ -24,13 +24,15 @@ bash:
     # runAsNonRoot: true
     # runAsUser: 1000
 
-helm:
+cleaner:
   # Docker image used to uninstall this helm release
   repository: appscode/helm
   # Image pull policy of Docker image used for helm command
   pullPolicy: IfNotPresent
   # Image tag of Docker image used for helm command
   tag: 3.4.2
+  # Skip generating cleaner YAML
+  skip: true
   # Security options the helm cleaner container should run with
   securityContext: {}
     # capabilities:

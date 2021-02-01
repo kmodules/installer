@@ -51,10 +51,15 @@ type ImageRef struct {
 	SecurityContext *core.SecurityContext `json:"securityContext"`
 }
 
+type CleanerRef struct {
+	ImageRef `json:",inline"`
+	Skip     bool `json:"skip"`
+}
+
 // PrepareKubernetesClusterSpec is the spec for redis version
 type PrepareKubernetesClusterSpec struct {
-	Bash               ImageRef                  `json:"bash"`
-	Helm               ImageRef                  `json:"helm"`
+	Preparer           ImageRef                  `json:"preparer"`
+	Cleaner            CleanerRef                `json:"cleaner"`
 	ImagePullSecrets   []string                  `json:"imagePullSecrets"`
 	NameOverride       string                    `json:"nameOverride"`
 	FullnameOverride   string                    `json:"fullnameOverride"`

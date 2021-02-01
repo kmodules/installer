@@ -1,4 +1,4 @@
-{{ $cmds := list "set -x" }}
+{{ $cmds := list "" }}
 
 {{ range $x := .Values.node.features }}
   {{ if eq $x "DISABLE_THP" }}
@@ -7,19 +7,27 @@
 {{ end }}
 
 {{ range $x := .Values.node.sysctls }}
-  {{ $cmds = append $cmds (printf "sysctl -w %v %v" $x.name $x.value) }}
+  {{ $cmds = append $cmds (printf "sysctl -w %v=%v" $x.name $x.value) }}
 {{ end }}
 
-apiVersion: batch/v1
-kind: Job
+{{ $cmds = append $cmds "sleep 3600" }}
+{{ $cmds = compact $cmds }}
+
+apiVersion: apps/v1
+kind: DaemonSet
 metadata:
   name: {{ include "prepare-kubernetes-cluster.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "prepare-kubernetes-cluster.labels" . | nindent 4 }}
 spec:
-  backoffLimit: 0
+  selector:
+    matchLabels:
+      {{- include "prepare-kubernetes-cluster.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      labels:
+        {{- include "prepare-kubernetes-cluster.selectorLabels" . | nindent 8 }}
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
@@ -32,12 +40,12 @@ spec:
       serviceAccountName: {{ include "prepare-kubernetes-cluster.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      initContainers:
+      containers:
         - name: preparer
           securityContext:
-            {{- toYaml .Values.bash.securityContext | nindent 12 }}
-          image: "{{ .Values.bash.repository }}:{{ .Values.bash.tag }}"
-          imagePullPolicy: {{ .Values.bash.pullPolicy }}
+            {{- toYaml .Values.preparer.securityContext | nindent 12 }}
+          image: "{{ .Values.preparer.repository }}:{{ .Values.preparer.tag }}"
+          imagePullPolicy: {{ .Values.preparer.pullPolicy }}
           command:
             - sh
             - -c
@@ -47,24 +55,11 @@ spec:
           volumeMounts:
             - name: host-root
               mountPath: /host
-      containers:
-        - name: cleaner
-          securityContext:
-            {{- toYaml .Values.helm.securityContext | nindent 12 }}
-          image: "{{ .Values.helm.repository }}:{{ .Values.helm.tag }}"
-          imagePullPolicy: {{ .Values.helm.pullPolicy }}
-          command:
-            - helm
-            - uninstall
-            - {{ .Release.Name }}
-            - --namespace={{ .Release.Namespace }}
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: host-root
           hostPath:
             path: /
-      restartPolicy: Never
+      restartPolicy: Always
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
