@@ -208,8 +208,11 @@ gen-values-schema: $(BUILD_DIRS)
 	@for dir in charts/*/; do \
 		dir=$${dir%*/}; \
 		dir=$${dir##*/}; \
-		crd=$$(echo $$dir | tr -d '-'); \
-		yq r crds/installer.kmodules.xyz_$${crd}s.yaml spec.versions[0].schema.openAPIV3Schema.properties.spec > bin/values.openapiv3_schema.yaml; \
+		crd_file=crds/installer.kmodules.xyz_$$(echo $$dir | tr -d '-')s.yaml; \
+		if [ ! -f $${crd_file} ]; then \
+			continue; \
+		fi; \
+		yq r $${crd_file} spec.versions[0].schema.openAPIV3Schema.properties.spec > bin/values.openapiv3_schema.yaml; \
 		yq d bin/values.openapiv3_schema.yaml description > charts/$${dir}/values.openapiv3_schema.yaml; \
 		rm -rf bin/values.openapiv3_schema.yaml; \
 	done
@@ -254,11 +257,6 @@ chart-contents-%:
 	fi
 	@if [ ! -z "$(APP_VERSION)" ]; then                                                \
 		yq w -i ./charts/$*/Chart.yaml appVersion --tag '!!str' $(APP_VERSION);        \
-		case "$*" in                                                                   \
-		  kubedb | kubedb-enterprise | kubedb-autoscaler)                              \
-		    yq w -i ./charts/$*/values.yaml operator.tag --tag '!!str' $(APP_VERSION); \
-		    ;;                                                                         \
-		esac;                                                                          \
 	fi
 
 fmt: $(BUILD_DIRS)
