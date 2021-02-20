@@ -37,6 +37,7 @@ jobs:
 
       - name: Run checks
         run: |
+          go version
           make ci
 
   kubernetes:
@@ -73,4 +74,4 @@ jobs:
       - name: Test charts
         run: |
           export KUBECONFIG="${HOME}/.kube/config"
-          make ct TEST_CHARTS=charts/prepare-kubernetes-cluster
+          ./hack/scripts/ct.sh
