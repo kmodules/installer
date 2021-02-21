@@ -25,6 +25,7 @@ import (
 
 func TestDefaultValues(t *testing.T) {
 	checker := schemachecker.New("../../..", []interface{}{
+		v1alpha1.AuditorSpec{},
 		v1alpha1.PrepareKubernetesClusterSpec{},
 	})
 	checker.TestAll(t)

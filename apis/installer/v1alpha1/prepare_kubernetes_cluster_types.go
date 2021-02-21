@@ -42,15 +42,6 @@ type PrepareKubernetesCluster struct {
 	Spec              PrepareKubernetesClusterSpec `json:"spec,omitempty"`
 }
 
-type ImageRef struct {
-	Repository string `json:"repository"`
-	PullPolicy string `json:"pullPolicy"`
-	Tag        string `json:"tag"`
-	// Security options the pod should run with.
-	// +optional
-	SecurityContext *core.SecurityContext `json:"securityContext"`
-}
-
 type CleanerRef struct {
 	ImageRef `json:",inline"`
 	Skip     bool `json:"skip"`
@@ -76,14 +67,6 @@ type PrepareKubernetesClusterSpec struct {
 type NodeConfiguration struct {
 	Features []string      `json:"features"`
 	Sysctls  []core.Sysctl `json:"sysctls"`
-}
-
-type ServiceAccountSpec struct {
-	Create bool `json:"create"`
-	//+optional
-	Name *string `json:"name"`
-	//+optional
-	Annotations map[string]string `json:"annotations"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
