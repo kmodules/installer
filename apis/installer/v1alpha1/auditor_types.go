@@ -79,6 +79,8 @@ type AuditorSpec struct {
 	EnableAnalytics bool       `json:"enableAnalytics"`
 	Monitoring      Monitoring `json:"monitoring"`
 	Watcher         Watcher    `json:"watcher"`
+	// +optional
+	License string `json:"license"`
 }
 
 type Watcher struct {
