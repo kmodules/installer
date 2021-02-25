@@ -17,6 +17,10 @@ replicaCount: 1
 # helm install appscode/auditor \
 #   --set license=<license file content>
 license: ""
+# Specify policies for auditor watcher.
+# If unspecified it defaults to every resources.
+policy: ""
+
 image:
   # Docker registry used to pull operator image
   registry: appscode
@@ -108,11 +112,3 @@ monitoring:
     # Prometheus crd will select ServiceMonitor using these labels.
     # Only usable when monitoring agent is `prometheus.io/operator`.
     labels: {}
-watcher:
-  # Specify policies for auditor watcher.
-  # If unspecified it defaults to every resources.
-  policy: ""
-  # Server Address which will handle all the events
-  receiverAddr: nats://classic-server.nats.svc
-  # Server credential for authentication
-  receiverCredential: ""

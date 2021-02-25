@@ -78,17 +78,10 @@ type AuditorSpec struct {
 	//+optional
 	EnableAnalytics bool       `json:"enableAnalytics"`
 	Monitoring      Monitoring `json:"monitoring"`
-	Watcher         Watcher    `json:"watcher"`
 	// +optional
 	License string `json:"license"`
-}
-
-type Watcher struct {
 	// +optional
-	Policy       string `json:"policy"`
-	ReceiverAddr string `json:"receiverAddr"`
-	// +optional
-	ReceiverCredential string `json:"receiverCredential"`
+	Policy string `json:"policy"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

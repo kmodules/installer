@@ -54,10 +54,6 @@ spec:
         - --license-file=/var/run/secrets/appscode/license/key.txt
         {{- end }}
         - --policy-file=/var/policy/default.yaml
-        - --receiver-addr={{ .Values.watcher.receiverAddr }}
-  {{- if .Values.watcher.receiverCredential }}
-        - --receiver-credential-file=/var/receiver/user.creds
-  {{- end }}
         ports:
         - containerPort: 8443
         env:
@@ -94,10 +90,6 @@ spec:
         {{- end }}
         - name: policy-file
           mountPath: /var/policy
-{{- if .Values.watcher.receiverCredential }}
-        - name: receiver-credential
-          mountPath: /var/receiver
-{{- end }}
       volumes:
       - name: serving-cert
         secret:
@@ -113,12 +105,6 @@ spec:
         secret:
           defaultMode: 420
           secretName: {{ include "auditor.fullname" .}}-policy
-{{- if .Values.watcher.receiverCredential}}
-      - name: receiver-credential
-        secret:
-          defaultMode: 420
-          secretName: {{ include "auditor.fullname" .}}-receiver-credential
-{{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
     {{- if or .Values.tolerations $criticalAddon }}
