@@ -7,7 +7,7 @@ spec:
   group: auditor.appscode.com
   names:
     categories:
-    - metrics
+    - auditor
     - appscode
     - all
     kind: SiteInfo
@@ -19,6 +19,7 @@ spec:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
+        description: SiteInfo captures information of a product deployment site.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
