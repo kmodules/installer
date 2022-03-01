@@ -4,10 +4,11 @@
 
 ## TL;DR;
 
-```console
+```bash
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm install prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system
+$ helm search repo appscode/prepare-kubernetes-cluster --version=v0.1.0
+$ helm upgrade -i prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system --create-namespace --version=v0.1.0
 ```
 
 ## Introduction
@@ -20,10 +21,10 @@ This chart deploys a Kubernetes Job on a [Kubernetes](http://kubernetes.io) clus
 
 ## Installing the Chart
 
-To install the chart with the release name `prepare-kubernetes-cluster`:
+To install/upgrade the chart with the release name `prepare-kubernetes-cluster`:
 
-```console
-$ helm install prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system
+```bash
+$ helm upgrade -i prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system --create-namespace --version=v0.1.0
 ```
 
 The command deploys a Kubernetes Job on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -32,10 +33,10 @@ The command deploys a Kubernetes Job on the Kubernetes cluster in the default co
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `prepare-kubernetes-cluster`:
+To uninstall the `prepare-kubernetes-cluster`:
 
-```console
-$ helm delete prepare-kubernetes-cluster -n kube-system
+```bash
+$ helm uninstall prepare-kubernetes-cluster -n kube-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -71,15 +72,15 @@ The following table lists the configurable parameters of the `prepare-kubernetes
 | node.sysctls               | Specify an array of sysctl parameters. <br> Example: <br> `helm template charts/prepare-kubernetes-cluster \` <br> `--set node.sysctls[0].name=vm.max_map_count \` <br> `--set node.sysctls[0].value=300000`                                            | <code>[{"name":"vm.max_map_count","value":"262144"}]</code> |
 
 
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
-```console
-$ helm install prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system --set preparer.repository=tianon/toybox
+```bash
+$ helm upgrade -i prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system --create-namespace --version=v0.1.0 --set preparer.repository=tianon/toybox
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
-```console
-$ helm install prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system --values values.yaml
+```bash
+$ helm upgrade -i prepare-kubernetes-cluster appscode/prepare-kubernetes-cluster -n kube-system --create-namespace --version=v0.1.0 --values values.yaml
 ```

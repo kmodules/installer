@@ -4,10 +4,11 @@
 
 ## TL;DR;
 
-```console
+```bash
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm install kmodules-crds appscode/kmodules-crds -n kube-system
+$ helm search repo appscode/kmodules-crds --version=v0.1.0
+$ helm upgrade -i kmodules-crds appscode/kmodules-crds -n kube-system --create-namespace --version=v0.1.0
 ```
 
 ## Introduction
@@ -20,10 +21,10 @@ This chart deploys Kmodules crds on a [Kubernetes](http://kubernetes.io) cluster
 
 ## Installing the Chart
 
-To install the chart with the release name `kmodules-crds`:
+To install/upgrade the chart with the release name `kmodules-crds`:
 
-```console
-$ helm install kmodules-crds appscode/kmodules-crds -n kube-system
+```bash
+$ helm upgrade -i kmodules-crds appscode/kmodules-crds -n kube-system --create-namespace --version=v0.1.0
 ```
 
 The command deploys Kmodules crds on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -32,10 +33,10 @@ The command deploys Kmodules crds on the Kubernetes cluster in the default confi
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `kmodules-crds`:
+To uninstall the `kmodules-crds`:
 
-```console
-$ helm delete kmodules-crds -n kube-system
+```bash
+$ helm uninstall kmodules-crds -n kube-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.

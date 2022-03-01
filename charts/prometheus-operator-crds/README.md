@@ -4,10 +4,11 @@
 
 ## TL;DR;
 
-```console
+```bash
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm install prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system
+$ helm search repo appscode/prometheus-operator-crds --version=v0.45.0
+$ helm upgrade -i prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system --create-namespace --version=v0.45.0
 ```
 
 ## Introduction
@@ -20,10 +21,10 @@ This chart deploys Prometheus Operator crds on a [Kubernetes](http://kubernetes.
 
 ## Installing the Chart
 
-To install the chart with the release name `prometheus-operator-crds`:
+To install/upgrade the chart with the release name `prometheus-operator-crds`:
 
-```console
-$ helm install prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system
+```bash
+$ helm upgrade -i prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system --create-namespace --version=v0.45.0
 ```
 
 The command deploys Prometheus Operator crds on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -32,10 +33,10 @@ The command deploys Prometheus Operator crds on the Kubernetes cluster in the de
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `prometheus-operator-crds`:
+To uninstall the `prometheus-operator-crds`:
 
-```console
-$ helm delete prometheus-operator-crds -n kube-system
+```bash
+$ helm uninstall prometheus-operator-crds -n kube-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
