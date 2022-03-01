@@ -4,10 +4,11 @@
 
 ## TL;DR;
 
-```console
+```bash
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm install cert-manager-crds appscode/cert-manager-crds -n kube-system
+$ helm search repo appscode/cert-manager-crds --version=1.2.0
+$ helm upgrade -i cert-manager-crds appscode/cert-manager-crds -n kube-system --create-namespace --version=1.2.0
 ```
 
 ## Introduction
@@ -20,10 +21,10 @@ This chart deploys cert-manager crds on a [Kubernetes](http://kubernetes.io) clu
 
 ## Installing the Chart
 
-To install the chart with the release name `cert-manager-crds`:
+To install/upgrade the chart with the release name `cert-manager-crds`:
 
-```console
-$ helm install cert-manager-crds appscode/cert-manager-crds -n kube-system
+```bash
+$ helm upgrade -i cert-manager-crds appscode/cert-manager-crds -n kube-system --create-namespace --version=1.2.0
 ```
 
 The command deploys cert-manager crds on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -32,10 +33,10 @@ The command deploys cert-manager crds on the Kubernetes cluster in the default c
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `cert-manager-crds`:
+To uninstall the `cert-manager-crds`:
 
-```console
-$ helm delete cert-manager-crds -n kube-system
+```bash
+$ helm uninstall cert-manager-crds -n kube-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.

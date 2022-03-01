@@ -4,10 +4,11 @@
 
 ## TL;DR;
 
-```console
+```bash
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm install application-crds appscode/application-crds -n kube-system
+$ helm search repo appscode/application-crds --version=v0.8.3
+$ helm upgrade -i application-crds appscode/application-crds -n kube-system --create-namespace --version=v0.8.3
 ```
 
 ## Introduction
@@ -20,10 +21,10 @@ This chart deploys Application crds on a [Kubernetes](http://kubernetes.io) clus
 
 ## Installing the Chart
 
-To install the chart with the release name `application-crds`:
+To install/upgrade the chart with the release name `application-crds`:
 
-```console
-$ helm install application-crds appscode/application-crds -n kube-system
+```bash
+$ helm upgrade -i application-crds appscode/application-crds -n kube-system --create-namespace --version=v0.8.3
 ```
 
 The command deploys Application crds on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -32,10 +33,10 @@ The command deploys Application crds on the Kubernetes cluster in the default co
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `application-crds`:
+To uninstall the `application-crds`:
 
-```console
-$ helm delete application-crds -n kube-system
+```bash
+$ helm uninstall application-crds -n kube-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
