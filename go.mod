@@ -3,15 +3,18 @@ module kmodules.xyz/installer
 go 1.12
 
 require (
-	github.com/gobuffalo/flect v0.2.3 // indirect
-	github.com/google/go-cmp v0.5.6 // indirect
+	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/google/gofuzz v1.1.0
 	github.com/json-iterator/go v1.1.11 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	github.com/mattn/go-colorable v0.1.9 // indirect
+	github.com/mattn/go-isatty v0.0.14 // indirect
+	golang.org/x/sys v0.0.0-20210817190340-bfb29a6856f2 // indirect
+	golang.org/x/text v0.3.7 // indirect
 	k8s.io/api v0.21.1
 	k8s.io/apimachinery v0.21.1
-	kmodules.xyz/schema-checker v0.1.3
+	k8s.io/klog/v2 v2.9.0 // indirect
+	kmodules.xyz/schema-checker v0.2.0
+	sigs.k8s.io/structured-merge-diff/v4 v4.1.2 // indirect
 )
 
 replace bitbucket.org/ww/goautoneg => gomodules.xyz/goautoneg v0.0.0-20120707110453-a547fc61f48d
@@ -102,7 +105,7 @@ replace k8s.io/api => k8s.io/api v0.21.1
 
 replace k8s.io/apimachinery => github.com/kmodules/apimachinery v0.21.2-rc.0.0.20210617231004-332981b97d2d
 
-replace k8s.io/apiserver => github.com/kmodules/apiserver v0.21.2-0.20210716212718-83e5493ac170
+replace k8s.io/apiserver => github.com/kmodules/apiserver v0.21.2-0.20220112070009-e3f6e88991d9
 
 replace k8s.io/cli-runtime => k8s.io/cli-runtime v0.21.1
 
