@@ -17,6 +17,7 @@ limitations under the License.
 package v1alpha1_test
 
 import (
+	"os"
 	"testing"
 
 	"kmodules.xyz/installer/apis/installer/v1alpha1"
@@ -24,8 +25,8 @@ import (
 )
 
 func TestDefaultValues(t *testing.T) {
-	checker := schemachecker.New("../../..", []interface{}{
-		v1alpha1.PrepareKubernetesClusterSpec{},
-	})
+	checker := schemachecker.New(os.DirFS("../../.."),
+		schemachecker.TestCase{Obj: v1alpha1.PrepareKubernetesClusterSpec{}},
+	)
 	checker.TestAll(t)
 }
