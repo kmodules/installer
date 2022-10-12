@@ -18,3 +18,8 @@
 crd-importer \
     --input=https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.crds.yaml \
     --out=./charts/cert-manager-crds/crds
+
+# import prometheus-operator crds
+crd-importer \
+    --input=https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.60.1/stripped-down-crds.yaml \
+    --out=./charts/prometheus-operator-crds/crds
