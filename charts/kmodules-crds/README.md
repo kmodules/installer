@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm search repo appscode/kmodules-crds --version=v0.1.0
-$ helm upgrade -i kmodules-crds appscode/kmodules-crds -n kube-system --create-namespace --version=v0.1.0
+$ helm search repo appscode/kmodules-crds --version=v0.25.1
+$ helm upgrade -i kmodules-crds appscode/kmodules-crds -n kube-system --create-namespace --version=v0.25.1
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys Kmodules crds on a [Kubernetes](http://kubernetes.io) cluster
 To install/upgrade the chart with the release name `kmodules-crds`:
 
 ```bash
-$ helm upgrade -i kmodules-crds appscode/kmodules-crds -n kube-system --create-namespace --version=v0.1.0
+$ helm upgrade -i kmodules-crds appscode/kmodules-crds -n kube-system --create-namespace --version=v0.25.1
 ```
 
 The command deploys Kmodules crds on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.

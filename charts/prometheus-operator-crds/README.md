@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add appscode https://charts.appscode.com/stable/
 $ helm repo update
-$ helm search repo appscode/prometheus-operator-crds --version=v0.45.0
-$ helm upgrade -i prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system --create-namespace --version=v0.45.0
+$ helm search repo appscode/prometheus-operator-crds --version=v0.60.1
+$ helm upgrade -i prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system --create-namespace --version=v0.60.1
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart deploys Prometheus Operator crds on a [Kubernetes](http://kubernetes.
 To install/upgrade the chart with the release name `prometheus-operator-crds`:
 
 ```bash
-$ helm upgrade -i prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system --create-namespace --version=v0.45.0
+$ helm upgrade -i prometheus-operator-crds appscode/prometheus-operator-crds -n kube-system --create-namespace --version=v0.60.1
 ```
 
 The command deploys Prometheus Operator crds on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
