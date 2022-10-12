@@ -16,5 +16,5 @@
 
 # import cert-manager crds
 crd-importer \
-    --input=https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml \
+    --input=https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.crds.yaml \
     --out=./charts/cert-manager-crds/crds
